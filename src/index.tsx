@@ -5,11 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from "styled-components";
 import { myTheme } from "theme/my-theme";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './store'
+
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={myTheme}>
-      <App />
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

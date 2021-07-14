@@ -1,32 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import { Home } from './containers'
 import axios from 'axios'
-import { Layout, Card } from './components/styled.ts'
+import { Layout, Card, SideList, SideListElement, FixOverflow, ScrolledArea } from './components/styled';
+import { IProvider, ICategory } from './models';
+import {useDispatch,useSelector} from 'react-redux';
+import { CategoryData} from './store/category'
 
 
-function App() {
-  const [data, setData] = useState([])
+
+
+const App: React.FC = () => {
+
+  const [data, setData] = useState<ICategory[]>([])
+  const [paymentProviders, setPaymentProviders] = useState<IProvider[]>([])
+
+  const dispatch = useDispatch()
+  const DAT = useSelector(state=>state)
+  console.log('DAT: ',DAT)
 
   useEffect(() => {
-    axios.get('http://localhost:4000/payment/categories').then(res => setData(res.data))
+    // axios.get('http://localhost:4000/payment/categories').then(res => setData(res.data))
+    dispatch(CategoryData())
   }, [])
 
   return (
     <Layout>
-      <div>
+      <SideList>
         {data?.map(item => {
           const { name, id } = item
           return (
-            <div key={id}>{name}</div>
+            <SideListElement key={id} onClick={() => setPaymentProviders(item.providers)} >{name}</SideListElement>
+
           )
         })}
-      </div>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => {
-        return <Card></Card>
-      })}
+      </SideList>
+      <FixOverflow>
+        <ScrolledArea>
+          <Switch>
+            <Route path="/">
+              <Home data={paymentProviders} />
+            </Route>
+            <Route path="/provider">
+              
+            </Route>
+          </Switch>
+        </ScrolledArea>
+      </FixOverflow>
 
     </Layout>
+
+
+
   );
 }
 
 export default App;
+

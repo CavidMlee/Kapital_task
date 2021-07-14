@@ -6,9 +6,14 @@ interface CardProps {
 }
 
 export const Card = styled.div<CardProps>`
+  margin:15px;
+  text-align: center;
   display: flex;
-  min-height: 250px;
-  min-width: 400px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  height: 200px;
+  width: 250px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.white};
 `;
