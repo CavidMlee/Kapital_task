@@ -1,0 +1,340 @@
+[
+    {
+        "id": "123",
+        "name": "Kommunal xidmətlər",
+        "providers": [
+            {
+                "id": "1",
+                "name": "Azərsu",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Əhali"
+                            },
+                            {
+                                "k": "2",
+                                "v": "Qeyri-əhali"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Abunəçinin kodu"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "AzəriQaz",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Əhali"
+                            },
+                            {
+                                "k": "2",
+                                "v": "Qeyri-əhali"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Abunəçinin kodu"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "AzerIstilikTechizat",
+                "fields": [
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Kod"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "124",
+        "name": "Mobil",
+        "providers": [
+            {
+                "id": "1",
+                "name": "Bakcell",
+                "fields": [
+                    {
+                        "id": "bakcell_id",
+                        "type": 2,
+                        "label": "Nömrə"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Azercell",
+                "fields": [
+                    {
+                        "id": "azercell_id",
+                        "type": 2,
+                        "label": "Nömrə"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "Nar",
+                "fields": [
+                    {
+                        "id": "nar_id",
+                        "type": 2,
+                        "label": "Nömrə"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "125",
+        "name": "Sığorta",
+        "providers": [
+            {
+                "id": "1",
+                "name": "PAŞA Sığorta",
+                "fields": [
+                    {
+                        "id": "series_id",
+                        "type": 1,
+                        "label": "Şəhadətnamə seriyası"
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Şəhadətnamə nömrəsi"
+                    },
+                    {
+                        "id": "year_id",
+                        "type": 2,
+                        "label": "Buraxılış ili"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Icbari Sığorta Bürosu",
+                "fields": [
+                    {
+                        "id": "series_id",
+                        "type": 4,
+                        "label": "Şəhadətnamə seriyası",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Sənəd Nömrəsi"
+                            },
+                            {
+                                "k": "2",
+                                "v": "VÖEN"
+                            },
+                            {
+                                "k": "2",
+                                "v": "Şəxsiyyət vəsiqəsinin nömrəsi"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "126",
+        "name": "Cərimə",
+        "providers": [
+            {
+                "id": "1",
+                "name": "BNA",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Protokol nömrəsi"
+                            },
+                            {
+                                "k": "2",
+                                "v": "Sürücülük vəsiqəsi"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "DYP ödənişləri",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Protokol nömrəsi"
+                            },
+                            {
+                                "k": "2",
+                                "v": "Sürücülük vəsiqəsi"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "127",
+        "name": "Xeyriyyəçilik",
+        "providers": [
+            {
+                "id": "1",
+                "name": "Azərbaycan Ordusuna Yardım Fondu",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Şəxsiyyət vəsiqəsinin nömrəsi"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "YAŞAT fondu",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Şəxsiyyət vəsiqəsinin nömrəsi"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Koronavirusla Mübarizəyə Dəstək Fondu",
+                "fields": [
+                    {
+                        "id": "assigment_id",
+                        "type": 4,
+                        "label": "Təyinat",
+                        "options": [
+                            {
+                                "k": "1",
+                                "v": "Şəxsiyyət vəsiqəsinin nömrəsi"
+                            },
+                            {
+                                "k": "2",
+                                "v": "VÖEN"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "number_id",
+                        "type": 1,
+                        "label": "Sənəd nömrəsi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "128",
+        "name": "Elektron pul kisəsi",
+        "providers": [
+            {
+                "id": "1",
+                "name": "BillFort",
+                "fields": [
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Abunəçinin kodu"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Payeer | EUR",
+                "fields": [
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Abunəçinin kodu"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "Perfect Money | USD",
+                "fields": [
+                    {
+                        "id": "code_id",
+                        "type": 1,
+                        "label": "Abunəçinin kodu"
+                    }
+                ]
+            }
+        ]
+    }
+]
