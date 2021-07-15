@@ -16,5 +16,18 @@ export const Card = styled.div<CardProps>`
   width: 250px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.white};
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover{
+    background-color: ${props => props.theme.colors.secondary};
+    color:${props => props.theme.colors.white}
+  }
 `;
+
+export const CardWrapper = styled.div<CardProps>`
+  width: 100%;
+  height: auto;
+  background-color: ${props => props.theme.colors.white};
+  padding: 20px 40px;
+`
 

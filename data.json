@@ -104,39 +104,6 @@
                         "label": "Nömrə"
                     }
                 ]
-            },
-            {
-                "id": "1",
-                "name": "Bakcell",
-                "fields": [
-                    {
-                        "id": "bakcell_id",
-                        "type": 2,
-                        "label": "Nömrə"
-                    }
-                ]
-            },
-            {
-                "id": "2",
-                "name": "Azercell",
-                "fields": [
-                    {
-                        "id": "azercell_id",
-                        "type": 2,
-                        "label": "Nömrə"
-                    }
-                ]
-            },
-            {
-                "id": "3",
-                "name": "Nar",
-                "fields": [
-                    {
-                        "id": "nar_id",
-                        "type": 2,
-                        "label": "Nömrə"
-                    }
-                ]
             }
         ]
     },
@@ -304,7 +271,7 @@
                 ]
             },
             {
-                "id": "2",
+                "id": "3",
                 "name": "Koronavirusla Mübarizəyə Dəstək Fondu",
                 "fields": [
                     {

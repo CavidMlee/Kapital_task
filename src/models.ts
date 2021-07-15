@@ -18,7 +18,7 @@ export interface IAmount {
 export interface IReceipt {
     id: string,
     date: string,
-    details: IPair<string | number, Object>[],
+    details: IPair<string | number, any>[],
     amount: IAmount
 }
 
@@ -26,7 +26,7 @@ export interface ICustomField {
     id: string,
     type: number,
     label: string,
-    options: IPair<string | number, Object>[]
+    options?: IPair<string | number, any>[]
 }
 
 export interface IProvider {

@@ -20,6 +20,7 @@ export const SideListElement = styled.div<SideListProps>`
     margin:10px;
     color: ${props => props.theme.colors.white};
     cursor: pointer;
+    transition: all 0.2s;
     &:hover{
         background-color: ${props => props.theme.colors.white};
         color:${props => props.theme.colors.dark}
@@ -27,9 +28,8 @@ export const SideListElement = styled.div<SideListProps>`
     }
     &::before{
         content:'';
-        position: absolute;
-        left: 2px;
-        top:23px;
+        display: inline-block;
+        margin-right: 10px;
         width:10px;
         height: 10px;
         border-radius: 100%;

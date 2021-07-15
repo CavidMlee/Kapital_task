@@ -3,10 +3,10 @@ import client from "../../client";
 
 export const CategoryData = createAsyncThunk(
     "categoryData",
-    async (paymentType, thunkAPI) => {
+    async (config, thunkAPI) => {
         try {
             const data = await client("payment/categories");
-            console.log('sdsd:',data);
+            return data
 
         }
         catch (err) {

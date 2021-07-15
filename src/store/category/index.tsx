@@ -17,7 +17,7 @@ const CategoryDataSlice = createSlice({
     reducers: {},
     extraReducers: {
         [CategoryData.fulfilled.type]: (state, action) => {
-            state.categoryData = action.data
+            state.categoryData = action.payload
         },
         [CategoryData.rejected.type]: (state, action) => {
             state.error = action.data

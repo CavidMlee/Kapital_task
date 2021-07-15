@@ -8,7 +8,8 @@ declare module "styled-components" {
             main: string;
             secondary: string;
             white: string;
-            dark:string;
+            dark: string;
+            lightGray: string;
         };
     }
 }

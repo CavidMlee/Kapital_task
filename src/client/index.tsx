@@ -23,7 +23,7 @@ const client = (endpoint: string, { body, ...customConfig }: any = {}) => {
         },
     };
 
-    return axios.request(config).then(res =>console.log(res?.data) );
+    return axios.request(config).then(res => res?.data);
 }
 
 export default client;
