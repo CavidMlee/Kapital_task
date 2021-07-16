@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { categoryDataReducer } from './category';
 import { providerListDataReducer } from './providerList';
-import { providerDataReducer } from './provider'
-import { ICategory, IProvider } from '../models'
+import {paymentReducer} from './payment'
+import { providerDataReducer } from './provider';
+import { ICategory, IProvider,IReceipt } from '../models';
 
 export default configureStore({
     devTools: process.env.NODE_ENV !== "production",
     reducer: {
         categoryData: categoryDataReducer,
         providerListData: providerListDataReducer,
-        providerData: providerDataReducer
+        providerData: providerDataReducer,
+        payment:paymentReducer
 
     },
 })
@@ -17,5 +19,6 @@ export default configureStore({
 export interface RootState {
     categoryData: { categoryData: ICategory[], error: Object | string },
     providerListData: { providerListData: IProvider[] },
-    providerData: { providerData: IProvider }
+    providerData: { providerData: IProvider },
+    payment:{paymentData:IReceipt}
 }

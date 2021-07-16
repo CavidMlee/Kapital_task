@@ -1,45 +1,117 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { Input, CardWrapper, FormItem, Select, Form, Button, SecondButton } from '../components/styled';
+import { Input, CardWrapper, FormItem, Select, Form, Button, SecondButton, ValidationErrorText } from '../components/styled';
 import { IProvider, ICategory, ICustomField } from '../models';
-import { RootState } from '../store'
+import { RootState } from '../store';
+import { Payment } from '../store/payment'
+import validations from '../utils/validation';
 
 
 interface IProps { }
 
 
 export const Provider: React.FC<IProps> = () => {
-    const history = useHistory()
+    const [value, setValue] = useState<any>({
+        amount: '',
+        currency: '',
+        number: '',
+        exp_month: '',
+        exp_year: '',
+        cvv: ''
+    })
 
-    const providerData = useSelector((state: RootState) => state.providerData.providerData)
+    const [errors, setErrors] = useState<any>({})
+
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const providerData = useSelector((state: RootState) => state.providerData.providerData);
+    const paymentData = useSelector((state: RootState) => state.payment.paymentData)
+
+    useEffect(() => {
+        if (providerData?.fields) {
+            let inputName = {}
+            providerData.fields?.map((item: ICustomField) => {
+                const { id } = item
+                inputName = { ...inputName, [id]: '' }
+            })
+            setValue({
+                ...value,
+                ...inputName
+            })
+        }
+
+    }, [providerData])
 
     console.log('providerData: ', providerData)
+    console.log('paymentData: ', paymentData)
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
+        setValue({
+            ...value,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const handleFormSubmit = () => {
+        setErrors(validations(value))
+
+        let fieldsObject: Object = {}
+
+        providerData.fields.map((item: ICustomField) => {
+            const { id } = item
+            fieldsObject = { ...fieldsObject, id: value[id] }
+        })
+
+          dispatch(Payment({
+            providerId: providerData.id,
+            fields: {
+                ...fieldsObject
+            },
+            amount: {
+                amount: value.amount,
+                currency: value.currency
+            },
+            card: {
+                number: value.number,
+                exp_month: value.exp_month,
+                exp_year: value.exp_year,
+                cvv: value.cvv
+            }
+        }))
+
+        history.push('/receipt')
+
+    }
 
     const fieldType = (item: ICustomField) => {
-        switch (item.type) {
+        const { id, type, options } = item
+        switch (type) {
             case 1:
-                return <Input name={item.id} />
+                return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
                 break;
             case 2:
-                return <Input name={item.id} />
+                return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
                 break;
             case 3:
-                return <Input name={item.id} />
+                return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
                 break;
             case 4:
-                return <Select name={item.id}>
-                    {item.options?.map(item => {
+                return <Select name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} >
+                    <option disabled></option>
+                    {options?.map(item => {
                         return <option key={item.k} value={item.v}>{item.v}</option>
                     })}
                 </Select>
                 break;
             case 5:
-                return <Input name={item.id} />
+                return <Input name={item.id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
                 break;
         }
     }
+
 
     return (
         <React.Fragment>
@@ -48,46 +120,55 @@ export const Provider: React.FC<IProps> = () => {
                 <h2>{providerData.name}</h2>
                 <Form>
                     {providerData.fields?.map((item: ICustomField) => {
+                        const { id, label } = item
                         return (
-                            <div key={item.id}>
+                            <div key={id}>
                                 <FormItem>
-                                    <label>{item.label}</label>
+                                    <label>{label}</label>
                                     {fieldType(item)}
+                                    {errors[id] && <ValidationErrorText>{errors[id]}</ValidationErrorText>}
                                 </FormItem>
                             </div>
                         )
                     })}
                     <FormItem>
                         <label>Məbləğ</label>
-                        <Input />
+                        <Input name='amount' value={value.amount || ''} onChange={(event) => handleChange(event)} />
+                        {errors.amount && <ValidationErrorText>{errors.amount}</ValidationErrorText>}
                     </FormItem>
                     <FormItem>
                         <label>Valyuta</label>
-                        <Select>
+                        <Select name='currency' value={value.currency || ''} onChange={(event) => handleChange(event)} >
+                            <option disabled></option>
                             <option value="AZN">AZN</option>
                             <option value="USD">USD</option>
                             <option value="EUR">EUR</option>
                         </Select>
+                        {errors.currency && <ValidationErrorText>{errors.currency}</ValidationErrorText>}
                     </FormItem>
                     <FormItem>
                         <label>Kart nömrəsi</label>
-                        <Input name="number" />
+                        <Input name="number" value={value.number || ''} onChange={(event) => handleChange(event)} />
+                        {errors.number && <ValidationErrorText>{errors.number}</ValidationErrorText>}
                     </FormItem>
                     <FormItem>
                         <label>Ay</label>
-                        <Input name="exp_month" />
+                        <Input name="exp_month" value={value.exp_month || ''} onChange={(event) => handleChange(event)} />
+                        {errors.exp_month && <ValidationErrorText>{errors.exp_month}</ValidationErrorText>}
                     </FormItem>
                     <FormItem>
                         <label>İl</label>
-                        <Input name="exp_year" />
+                        <Input name="exp_year" value={value.exp_year || ''} onChange={(event) => handleChange(event)} />
+                        {errors.exp_year && <ValidationErrorText>{errors.exp_year}</ValidationErrorText>}
                     </FormItem>
                     <FormItem>
                         <label>CVV</label>
-                        <Input name="cvv" />
+                        <Input name="cvv" value={value.cvv || ''} onChange={(event) => handleChange(event)} />
+                        {errors.cvv && <ValidationErrorText>{errors.cvv}</ValidationErrorText>}
                     </FormItem>
                 </Form>
                 <SecondButton onClick={() => history.goBack()}>Geri</SecondButton>
-                <Button>Davam et</Button>
+                <Button onClick={handleFormSubmit}>Davam et</Button>
             </CardWrapper>
         </React.Fragment>
 

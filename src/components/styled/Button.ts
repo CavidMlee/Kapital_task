@@ -13,6 +13,7 @@ export const Button = styled.button<ButtonProps>`
   text-align: center;
   font-size: 16px;
   margin-right: 20px;
+  margin-top: 30px;
   cursor: pointer;
 `;
 

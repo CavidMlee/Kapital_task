@@ -16,36 +16,35 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
-app.post('/', function (req, res) {
+app.post('/payment/new', function (req, res) {
     console.log(req.body)
 
-    if (req.body.currency === 'AZN') {
-        return res.send({
-            "Receipt": [
-                {
-                    "id": "s23f34g45vn6j4gy5k64bj3ldl428gs",
-                    "date": "2018-12-17T05:31:25",
-                    "details": [
-                        {
-                            "k": "Service",
-                            "v": "Bakcel"
-                        },
-                        {
-                            "k": "Subscriber",
-                            "v": "+994 55 555 66 77"
-                        }
-                    ],
-                    "amount": {
-                        "value": "15.35",
-                        "currency": "AZN"
+    if (req.body.amount.currency === 'AZN') {
+        return res.send(
+
+            {
+                "id": "s23f34g45vn6j4gy5k64bj3ldl428gs",
+                "date": new Date(),
+                "details": [
+                    {
+                        "k": "Service",
+                        "v": "Bakcel"
+                    },
+                    {
+                        "k": "Subscriber",
+                        "v": "+994 55 555 66 77"
                     }
+                ],
+                "amount": {
+                    "value": req.body.amount.amount,
+                    "currency": "AZN"
                 }
-            ]
-        })
+            }
+        )
     }
     else {
-        return res.status(400).send({
-            message: 'This is an error!'
+        return res.status(404).send({
+            message: 'Yalnız AZN ilə ödəniş edə bilərsiniz'
         });
     }
 

@@ -10,6 +10,7 @@ interface CategoryState {
 
 const initialState = { categoryData: [], error: null } as CategoryState
 
+const cache:any = localStorage.getItem('AllData')
 
 const CategoryDataSlice = createSlice({
     name: 'categorydata',
@@ -17,10 +18,14 @@ const CategoryDataSlice = createSlice({
     reducers: {},
     extraReducers: {
         [CategoryData.fulfilled.type]: (state, action) => {
-            state.categoryData = action.payload
+            state.categoryData = navigator.onLine ? action.payload : JSON.parse(cache)
+
         },
         [CategoryData.rejected.type]: (state, action) => {
-            state.error = action.data
+            console.log('action: ',action)
+            state.error = action.error.message
+            
+            state.categoryData = JSON.parse(cache)
         }
     }
 })

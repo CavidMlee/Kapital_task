@@ -14,6 +14,5 @@ export const Input = styled.input<InputProps>`
   border: solid 1px ${props => props.theme.colors.lightGray};
   outline:none;
   background-color: transparent;
-  margin-bottom: 20px;
 `;
 

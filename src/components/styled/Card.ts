@@ -28,6 +28,6 @@ export const CardWrapper = styled.div<CardProps>`
   width: 100%;
   height: auto;
   background-color: ${props => props.theme.colors.white};
-  padding: 20px 40px;
+  padding: 40px;
 `
 

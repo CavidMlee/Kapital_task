@@ -12,7 +12,7 @@ export const ScrolledArea = styled.div<ScrolledAreaProps>`
     display: flex;
     flex-wrap: wrap;
     align-content: baseline;
-    padding:20px 20px 30px 35px
+    padding:10px 20px 30px 35px
     /* justify-content: center; */
 `;
 

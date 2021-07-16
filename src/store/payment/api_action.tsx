@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import client from "../../client";
 
-export const CategoryData = createAsyncThunk(
-    "categoryData",
-    async (config, thunkAPI) => {
+export const Payment = createAsyncThunk(
+    "payment",
+    async (paymentData:any , thunkAPI) => {
+
+        console.log('PPPP: ',paymentData)
         try {
-            const data = await client("payment/categories");
-            localStorage.setItem('AllData',JSON.stringify(data) );
+            const data = await client("payment/new",paymentData,{});
             return data
 
         }
