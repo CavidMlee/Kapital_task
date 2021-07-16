@@ -10,7 +10,7 @@ interface CategoryState {
 
 const initialState = { categoryData: [], error: null } as CategoryState
 
-const cache:any = localStorage.getItem('AllData')
+const cache: any = localStorage.getItem('AllData')
 
 const CategoryDataSlice = createSlice({
     name: 'categorydata',
@@ -22,9 +22,8 @@ const CategoryDataSlice = createSlice({
 
         },
         [CategoryData.rejected.type]: (state, action) => {
-            console.log('action: ',action)
             state.error = action.error.message
-            
+
             state.categoryData = JSON.parse(cache)
         }
     }

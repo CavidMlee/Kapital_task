@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { ToastContainer, toast } from 'react-toastify';
 import { Input, CardWrapper, FormItem, Select, Form, Button, SecondButton, ValidationErrorText } from '../components/styled';
-import { IProvider, ICategory, ICustomField } from '../models';
+import { ICustomField } from '../models';
 import { RootState } from '../store';
 import { Payment } from '../store/payment'
 import validations from '../utils/validation';
@@ -33,9 +34,9 @@ export const Provider: React.FC<IProps> = () => {
     useEffect(() => {
         if (providerData?.fields) {
             let inputName = {}
-            providerData.fields?.map((item: ICustomField) => {
+            providerData.fields.map((item: ICustomField) => {
                 const { id } = item
-                inputName = { ...inputName, [id]: '' }
+                return inputName = { ...inputName, [id]: '' }
             })
             setValue({
                 ...value,
@@ -45,8 +46,6 @@ export const Provider: React.FC<IProps> = () => {
 
     }, [providerData])
 
-    console.log('providerData: ', providerData)
-    console.log('paymentData: ', paymentData)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setValue({
@@ -56,48 +55,56 @@ export const Provider: React.FC<IProps> = () => {
     }
 
     const handleFormSubmit = () => {
-        setErrors(validations(value))
+        if (!navigator.onLine) {
+            toast.error('No Internet Connection', {
+                position: "top-right",
+                autoClose: 5000,
+            });
+        }
+        else {
 
-        let fieldsObject: Object = {}
+            setErrors(validations(value))
 
-        providerData.fields.map((item: ICustomField) => {
-            const { id } = item
-            fieldsObject = { ...fieldsObject, id: value[id] }
-        })
+            let fieldsObject: Object = {}
 
-          dispatch(Payment({
-            providerId: providerData.id,
-            fields: {
-                ...fieldsObject
-            },
-            amount: {
-                amount: value.amount,
-                currency: value.currency
-            },
-            card: {
-                number: value.number,
-                exp_month: value.exp_month,
-                exp_year: value.exp_year,
-                cvv: value.cvv
+            providerData.fields.map((item: ICustomField) => {
+                const { id } = item
+                return fieldsObject = { ...fieldsObject, id: value[id] }
+            })
+
+            if (Object.keys(validations(value)).length < 1) {
+                dispatch(Payment({
+                    providerId: providerData.id,
+                    fields: {
+                        ...fieldsObject
+                    },
+                    amount: {
+                        amount: value.amount,
+                        currency: value.currency
+                    },
+                    card: {
+                        number: value.number,
+                        exp_month: value.exp_month,
+                        exp_year: value.exp_year,
+                        cvv: value.cvv
+                    }
+                }))
+
+                history.push('/receipt')
             }
-        }))
-
-        history.push('/receipt')
-
+        }
     }
+
 
     const fieldType = (item: ICustomField) => {
         const { id, type, options } = item
         switch (type) {
             case 1:
                 return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
-                break;
             case 2:
-                return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
-                break;
+                return <Input name={id} value={value[id] || ''} type="number" onChange={(event) => handleChange(event)} />
             case 3:
-                return <Input name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
-                break;
+                return <Input name={id} value={value[id] || ''} type="number" onChange={(event) => handleChange(event)} />
             case 4:
                 return <Select name={id} value={value[id] || ''} onChange={(event) => handleChange(event)} >
                     <option disabled></option>
@@ -105,10 +112,8 @@ export const Provider: React.FC<IProps> = () => {
                         return <option key={item.k} value={item.v}>{item.v}</option>
                     })}
                 </Select>
-                break;
             case 5:
-                return <Input name={item.id} value={value[id] || ''} onChange={(event) => handleChange(event)} />
-                break;
+                return <Input name={item.id} type="datetime-local" value={value[id] || ''} onChange={(event) => handleChange(event)} />
         }
     }
 
@@ -170,6 +175,7 @@ export const Provider: React.FC<IProps> = () => {
                 <SecondButton onClick={() => history.goBack()}>Geri</SecondButton>
                 <Button onClick={handleFormSubmit}>Davam et</Button>
             </CardWrapper>
+            <ToastContainer />
         </React.Fragment>
 
     );

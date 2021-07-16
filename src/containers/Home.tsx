@@ -1,9 +1,8 @@
-import { async } from 'q';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { Card } from '../components/styled';
-import { IProvider, ICategory } from '../models';
+import { IProvider } from '../models';
 import { RootState } from '../store';
 import { ProviderDataAction } from '../store/provider'
 
@@ -18,12 +17,13 @@ export const Home: React.FC<IProps> = () => {
     const providerListData = useSelector((state: RootState) => state.providerListData.providerListData)
 
 
-    const getProvider = async (item: IProvider) => {
+    const getProvider = (item: IProvider) => {
         dispatch(ProviderDataAction(item))
         history.push('/provider')
     }
     return (
         <React.Fragment>
+
             {providerListData?.map(item => {
                 return <Card
                     key={item.id}

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DefaultTheme } from "styled-components";
 
 interface InputProps {
-    theme: DefaultTheme;
+  theme: DefaultTheme;
 }
 
 export const Input = styled.input<InputProps>`
@@ -14,5 +14,10 @@ export const Input = styled.input<InputProps>`
   border: solid 1px ${props => props.theme.colors.lightGray};
   outline:none;
   background-color: transparent;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 `;
 

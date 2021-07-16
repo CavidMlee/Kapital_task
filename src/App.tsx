@@ -1,15 +1,8 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { Home, Provider, Receipt } from './containers'
-import { Layout, Card, SideList, FixOverflow, ScrolledArea } from './components/styled';
+import React, { useEffect, useState } from 'react';
+import { Router } from './router'
+import { Layout, Button, SideList, FixOverflow, ScrolledArea } from './components/styled';
 import { SideListElement } from './components/SideListElement'
-import { IProvider, ICategory } from './models';
+import { ICategory } from './models';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { CategoryData } from './store/category';
@@ -24,11 +17,8 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  let cache: any = localStorage.getItem('AllData');
-  console.log(JSON.parse(cache))
-
   const [selectListItem, setSelectListItem] = useState<number>(0)
-  const [netWorkError, setNetworkError] = useState<boolean>(false)
+  const [reload, setReload] = useState<boolean>(false)
 
   let categoryData = useSelector((state: RootState) => state.categoryData.categoryData)
   const errorCategory = useSelector((state: RootState) => state.categoryData.error)
@@ -42,9 +32,11 @@ const App: React.FC = () => {
     }
   }, [errorCategory])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
 
     dispatch(CategoryData())
+
+    history.push('/')
 
     if (!navigator.onLine) {
       toast.error('No Internet Connection', {
@@ -52,7 +44,7 @@ const App: React.FC = () => {
         autoClose: 5000,
       });
     }
-  }, [])
+  }, [reload])
 
   useEffect(() => {
     if (categoryData) {
@@ -65,7 +57,7 @@ const App: React.FC = () => {
     history.push('/')
     setSelectListItem(index)
   }
-  console.log('categoryData: ', categoryData)
+
   return (
     <Layout>
       <SideList>
@@ -78,17 +70,8 @@ const App: React.FC = () => {
       </SideList>
       <FixOverflow>
         <ScrolledArea>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/provider">
-              <Provider />
-            </Route>
-            <Route exact path="/receipt">
-              <Receipt />
-            </Route>
-          </Switch>
+          {!localStorage.getItem('AllData') && <Button onClick={() => setReload(!reload)}>Tap to reload</Button>}
+          <Router />
         </ScrolledArea>
       </FixOverflow>
       <ToastContainer />

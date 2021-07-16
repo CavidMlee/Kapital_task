@@ -3,11 +3,10 @@ import client from "../../client";
 
 export const Payment = createAsyncThunk(
     "payment",
-    async (paymentData:any , thunkAPI) => {
+    async (paymentData: any, thunkAPI) => {
 
-        console.log('PPPP: ',paymentData)
         try {
-            const data = await client("payment/new",paymentData,{});
+            const data = await client("payment/new", paymentData, {});
             return data
 
         }
